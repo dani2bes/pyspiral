@@ -11,10 +11,8 @@ class Direction(Enum):
 
 def print_spiral(matrix):
     print(f"Hi there! Here is your spiral")
-    for i in range(len(matrix)):
-        for j in range(len(matrix)):
-            print(f"{matrix[i][j].value}", end=" ")
-        print()
+    for row in matrix:
+        print(" ".join(f"{cell.value}" for cell in row))
 
 
 def main():
@@ -23,7 +21,7 @@ def main():
             "Argument Error: provide the size for the bi-dimensional matrix"
         )
     size = int(sys.argv[1])
-    matrix = [[None for i in range(size)] for s in range(size)]
+    matrix = [[None] * size for _ in range(size)]
     direction = Direction.RIGHT
     row = 0
     col = 0
