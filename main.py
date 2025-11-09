@@ -9,10 +9,11 @@ class Direction(Enum):
     RIGHT = "→"
 
 
-def print_matrix(matrix):
+def print_spiral(matrix):
+    print(f"Hi there! Here is your spiral")
     for i in range(len(matrix)):
         for j in range(len(matrix)):
-            print(f"{matrix[i][j]}", end=" ")
+            print(f"{matrix[i][j].value}", end=" ")
         print()
 
 
@@ -23,51 +24,51 @@ def main():
         )
     size = int(sys.argv[1])
     matrix = [[None for i in range(size)] for s in range(size)]
-    print(f"Hi there! Here is your Spiral")
     direction = Direction.RIGHT
-    x = 0
-    y = 0
-    while matrix[x][y] is None:
-
-        print(f"LOOP x:{x} y:{y} direction:{direction}")
+    row = 0
+    col = 0
+    if size == 1:
+        matrix[row][col] = direction
+        print_spiral(matrix)
+        return
+    while matrix[row][col] is None:
         if Direction.RIGHT == direction:
-            if x + 1 < size and matrix[x + 1][y] is None:
-                matrix[x][y] = Direction.RIGHT
-                x += 1
+            if col + 1 < size and matrix[row][col + 1] is None:
+                matrix[row][col] = Direction.RIGHT
+                col += 1
             else:
-                matrix[x][y] = Direction.DOWN
+                matrix[row][col] = Direction.DOWN
                 direction = Direction.DOWN
-                y += 1
+                row += 1
             continue
-
         if Direction.DOWN == direction:
-            if y + 1 < size and matrix[x][y + 1] is None:
-                matrix[x][y] = Direction.DOWN
-                y += 1
+            if row + 1 < size and matrix[row + 1][col] is None:
+                matrix[row][col] = Direction.DOWN
+                row += 1
             else:
-                matrix[x][y] = Direction.LEFT
+                matrix[row][col] = Direction.LEFT
                 direction = Direction.LEFT
-                x -= 1
+                col -= 1
             continue
         if Direction.LEFT == direction:
-            if x - 1 > 0 and matrix[x - 1][y] is None:
-                matrix[x][y] = Direction.LEFT
-                x -= 1
+            if col - 1 >= 0 and matrix[row][col - 1] is None:
+                matrix[row][col] = Direction.LEFT
+                col -= 1
             else:
-                matrix[x][y] = Direction.UP
+                matrix[row][col] = Direction.UP
                 direction = Direction.UP
-                y -= 1
+                row -= 1
             continue
         if Direction.UP == direction:
-            if y - 1 > 0 and matrix[x][y - 1] is None:
-                matrix[x][y] = Direction.UP
-                y -= 1
+            if row - 1 >= 0 and matrix[row - 1][col] is None:
+                matrix[row][col] = Direction.UP
+                row -= 1
             else:
-                matrix[x][y] = Direction.RIGHT
+                matrix[row][col] = Direction.RIGHT
                 direction = direction.RIGHT
-                x += 1
+                col += 1
             continue
-    print(matrix)
+    print_spiral(matrix)
 
 
 if __name__ == "__main__":
