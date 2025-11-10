@@ -1,5 +1,6 @@
 from enum import Enum
 import sys
+from typing import List
 
 
 class Direction(Enum):
@@ -9,26 +10,21 @@ class Direction(Enum):
     RIGHT = "→"
 
 
-def print_spiral(matrix):
+def print_spiral(matrix: List[List[Direction]]):
     print(f"Hi there! Here is your spiral")
     for row in matrix:
         print(" ".join(f"{cell.value}" for cell in row))
 
 
-def main():
-    if len(sys.argv) != 2:
-        raise ValueError(
-            "Argument Error: provide the size for the bi-dimensional matrix"
-        )
-    size = int(sys.argv[1])
+def generate_spiral(size: int) -> List[List[Direction]]:
+    if size == 0:
+        return []
     matrix = [[None] * size for _ in range(size)]
     direction = Direction.RIGHT
-    row = 0
-    col = 0
+    row, col = 0, 0
     if size == 1:
         matrix[row][col] = direction
-        print_spiral(matrix)
-        return
+        return matrix
     while matrix[row][col] is None:
         if Direction.RIGHT == direction:
             if col + 1 < size and matrix[row][col + 1] is None:
@@ -66,6 +62,23 @@ def main():
                 direction = direction.RIGHT
                 col += 1
             continue
+    return matrix
+
+
+def validate_arguments():
+    if len(sys.argv) != 2:
+        raise ValueError(
+            "Argument Error: provide the size for the two-dimensional matrix"
+        )
+    size = int(sys.argv[1])
+    if size < 0:
+        raise ValueError("Argument Error: the size must be positive")
+
+
+def main():
+    validate_arguments()
+    size = int(sys.argv[1])
+    matrix = generate_spiral(size)
     print_spiral(matrix)
 
 

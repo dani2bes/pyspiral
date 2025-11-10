@@ -1,5 +1,10 @@
 # PySpiral
-Prints a spiral using arrows given the size of a two-dimensional array
+Given the size of a two-dimensional array, prints a spiral using arrows
+
+# Usage
+```
+uv run python main.py [size]
+```
 ## Examples
 ```
 1. 1x1  → 
@@ -15,4 +20,10 @@ Prints a spiral using arrows given the size of a two-dimensional array
         → → ↓ ↓
         ↑ ↑ ← ↓
         ↑ ← ← ←
+
+5. 5x5  → → → → ↓
+        → → → ↓ ↓
+        ↑ → ↓ ↓ ↓
+        ↑ ↑ ← ← ↓
+        ↑ ← ← ← ←
 ```
